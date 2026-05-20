@@ -3,51 +3,83 @@
 
 = Related Work <chap:relatedwork>
 
-In this chapter, an overview of the related work is provided. The first section discusses
+In this chapter, an overview of the related work relevant to the thesis is provided. First section discusses the use of historical maps as sources for urban studies @sec:histmaps. Then, the use of IIIF and Allmaps is given. Lastly, existing feature extraction method from historical maps and deep learning methods are described.
 
-== Historical Maps as Sources for Urban Transformation Studies
-#highlight[Outline:]
-- Role of historical topographic maps in studying urban change
-  - Historical maps and their importance containing meaningful information about the past. Rich collection of historical maps in the western world, particularly in the Netherlands (e.g. TMK, Bonnebladen, Rivierkaart, Kadastrale Kaart 1832)
-- Dutch historical mapping context: Bonnebladen map series
-- Challenges in making digitized maps computationally accessible
+== Historical maps as sources for urban studies <sec:histmaps>
 
+// ---- PARAGRAPH 1: Dutch Historical Map Collections ----
+The Netherlands has a particularly rich tradition of historical cartographic documentation, offering one of the most extensive national map series in Europe. The  _Kraijenhoff_ map (1798-1822), _Topographische en Militaire Kaart van het Koningrijk der Nederlanden_ (TMK, 1850-1865) and the _Chromotopografische Kaart des Rijks_ (Bonnebladen, 1865-1949) together provide near-complete topographic coverage of the Netherlands across multiple decades, offering a unique multi-temporal record of the Dutch landscape. These series are further complemented by municipality-specific and thematic historical map series such as _Waterstaatkaart_, which offer considerably higher level of cartographic detail for specific regions and topics. The value of these collections for urban studies is well demonstrated by the _Historische Atlas van Nederland_ #cite(<rutte2023netherlands>), which traces the spatial evolution of Dutch towns and cities from the medieval period to the twentieth century, documenting the dramatic expansion of built-up areas during the industrial era. More recently, institutional efforts have sought to make such collections digitally accessible. The Dutch Kadaster launched _Topotijdreis_ #cite(<kadasterTopotijdreis2015>) #footnote[Topotijdreis website: https://topotijdreis.nl/], an online platform providing access to over 200 years of topographic maps (illustrated in @fig:topotijdreis), allowing users to explore Dutch landscape and how it has evolved over time. Despite these efforts, these digitized map collections remain in raster image format and are not yet machine-readable, limiting their use to visual inspection only and preventing direct computational querying or geospatial analysis.
 
-== Feature Extraction from Historical Maps
-#block-todo[Outline:]
-- Overview of approaches: manual, rule-based, and automated
-- Deep learning for historical map content extraction
-  - Require large volume of labeled training data, which is often scarce for historical maps, especially for limited homogeneousmap corpus (e.g. municipality map series)
-  - Existing pre-trained DL model are generic and not exclusive for historical maps (SAM2, ?)
-- Specific challenges: cartographic heterogeneity, visual noise, degradation
-
-=== Synthetic Training Data Generation
-- The problem of scarce labeled training data for historical maps
-- Unpaired image-to-image translation: CycleGAN
-- Bootstrapping strategies for training data
-- Limited map corpus (municipality map series)
+#figure(
+  image("../figs/ch2-figs/topotijdreis.png", width: 90%),
+  placement: auto,
+  caption: [The web application of _Topotijdreis_ developed by the Kadaster]
+)<fig:topotijdreis>
 
 
-== Urban Change Detection Methods (?) - digabung ga sama yang 2.1
-Pixel-based vs. object-based change detection (OBCD)
-Urban growth metrics and spatial analysis
-Applying change detection to historical multi-temporal map data
-
-== Map Accessibility and Geospatial Standards
-#highlight[- Outline: (what has been done?)]
-- IIIF as infrastructure for accessing historical map collections
-  - Publication of Dutch historical maps as IIIF resources. Used by many institutions as standards.
-- Georeferencing and IIIF tile services (Allmaps)
-  - IIIF handle georeferencing. Institution able to georeference their maps. The georeferenced maps can also be accessed via IIIF. 
+// ---- PARAGRAPH 2: Historical Maps for Urban Growth Analysis ----
+Nevertheless, where such processing has been carried out, typically through manual digitization or automated workflows, historical map series have demonstrated considerable value for studying long-term urban growth and land use change at multiple scales. The _Historisch Grondgebruk Nederland_ (HGN) project produced a nationwide digital land use dataset for the Netherlands around 1900, derived from historical topographic maps, providing one of the earliest spatially explicit records of Dutch land use before the remote sensing era #cite(<HGN1900dataset>). The HisGIS 1832 project digitized and georeferenced the first systematic cadastral survey of the Netherlands, producing a nationwide spatial database of land ownership and building footprints from 1832 #cite(<knawHisGIS2024>). At the city level, studies such as those synthesized in the _Historische Atlas van Nederland_ #cite(<rutte2023netherlands>) have quantified built-up area expansion for major Dutch cities between 1850 and 1900, revealing growth rates of several hundred percent in industrializing cities such as Rotterdam and Apeldoorn. These studies demonstrate that multi-temporal historical map series are capable of supporting statistical-level urban change analysis: measuring aggregate shifts in built-up extent, land use composition, and spatial distribution of urban development. However, such studies have largely been constrained to manually digitized datasets covering limited geographic extents, as the absence of scalable automated extraction methods has made nation-wide computational analysis infeasible. 
 
 
+// ---- PARAGRAPH 3: Accessibility Infrastructure: IIIF and Allmaps ----
+== International Image Interoperability Framework (IIIF) and Allmaps 
+A prerequisite for any large-scale computational analysis of historical maps is reliable programmatic access to digitized map collections, which are typically stored as high-resolution image files distributed across multiple institutional repositories. The International Image Interoperability Framework (IIIF) addresses this challenge by defining a set of open standards for delivering digital image objects online at scale, enabling consistent programmatic access through standardized APIs regardless of the hosting institution #cite(<snydmanIIIF2015>). Cultural heritage institutions in the Netherlands, including the Dutch National Archives, have adopted IIIF to serve their digitized map collections, making thousands of historical map sheets retrievable through uniform URL-based requests. 
+
+Building on IIIF, the Allmaps#footnote[Allmaps website: https://allmaps.org/] platform extends this infrastructure to specifically for cartographic collections, providing tools to curate, georeference, and explore digitized maps from any IIIF-compliant repository without requiring complex GIS infrastructure #cite(<Hanlon02092025>). All georeferencing information is stored in a standardized georeference annotation, an approved extension to the IIIF Presentation API based on the W3C Web Annotation standard #cite(<IIIFGeorefExtension2023>). A georeference annotation records the Ground Control Points (GCPs) that map pixel coordinates of the historical map image to real-world geographic coordinates, along with an optional transformation algorithm (e.g. Thin Plate Spline, Polynomial). The resulting annotation can be used to warp the map into a standard Coordinate Reference System (CRS), enabling direct client-side visualization through web mapping applications such as XYZ tile services, as well as integration into GIS tools such as QGIS for geospatial analysis workflows.
+
+While IIIF and Allmaps resolve the distribution and access challenge, they do not address the semantic extraction problem. Maps served through IIIF remain raster images without machine-readable content, and extracting meaningful geospatial features from them still requires additional processing methods, which is the focus of the following sections. 
+
+
+== Feature extraction from historical maps <sec:existing_method>
+
+// ---- PARAGRAPH 1: Chapter Intro - From Scanned Maps to Geodata ----
+Before historical maps can be used in any quantitative spatial analysis, they must undergo a multi-step processing chain to transform scanned raster images into machine-readable geodata. This chain typically involves digitization, georeferencing, image classification or segmentation, and post-processing to filter unwanted feature as text and symbols #cite(<gobbiNewToolsClassification2019>). The output of this process can take two forms: raster data, where each pixel is assigned a thematic class, or vector data, where spatial features are represented as discrete geometric objects such as polygons and lines. Raster outputs are well-suited for large-scale spatial analysis and land use change studies, while vector outputs enable more precise object-level queries and integration with modern GIS (Geographic Information System) datasets #cite(<gobbiNewToolsClassification2019>). Several main approaches of digitization map can be identified into four categories: manual, semi-automatic, machine learning and deep learning classification. 
+
+=== Manual digitization
+// - [] Manual extraction remains the main strategy
+// - [] Collaborative approaches and large-scale crowdsourcing
+// - [] HisGIS 1832 http://hisgis.nl/
+The extraction of spatial information from historical maps has traditionally relied on manual digitization since the emergence of GIS technology. In this approach, trained operators visually interpret the map and manually trace geographic features such as building footprints, road networks, and land parcel boundaries, assigning class labels or attribute values to each delineated object #cite(<gobbiNewToolsClassification2019>). The approach is valued in digital humanities for the interpretive depth it enables: operators can resolve ambiguous features, apply contextual knowledge, and produce geometrically precise vector outputs that automated methods often struggle to match #cite(<ICDAR2021Vectorization>). 
+
+A prominent example in the Dutch context is the HisGIS project #footnote[HisGIS project website: https://hisgis.nl/], which manually digitized and vectorized the Napoleonic cadastral survey of 1832, producing a nationwide spatial database of approximately 3 million land parcels covering the entire Netherlands, with attributes including parcel size, owner and land use for each units #cite(<knawHisGIS2024>). The scale and detail of HisGIS illustrates what manual digitization can achieve when organized as a sustained, multi-year collaborative effort. Collaborative approaches and large-scale crowdsourcing experiments have also been proposed to handle large map collections @budigPolygonConsensusSmart2016 @Southall02012017, distributing the annotation workload across many contributors. However, even with crowdsourcing, manual processes remain tedious, time-consuming, and non-reproducible #cite(<ICDAR2021Vectorization>).
+
+
+=== Semi-automated classification
+To reduce the reliance on manual labor, semi-automated methods have been developed that use image processing algorithms to automatically classify map pixels or regions, while still requiring human intervention to define parameters or provide reference samples. The main techniques developed for this purpose include histogram thresholding, color space clustering, edge detection, region growing, and Object-Based Image Analysis (OBIA) @chiangSurvey2014 @gobbiNewToolsClassification2019. These methods exploit the cartographic properties of printed maps, particularly the use of distinct colors, line patterns, and spatial boundaries to encode different feature types, to separate target classes.
+
+A notable application in the Dutch context is the _Historisch Grondgebruk Nederland 1900_ (HGN1900) project #cite(<HGN1900dataset>), which produced a nationwide digital land use dataset for the Netherlands around 1900, derived from the historical topographic maps using color-based image classification and manual post-correction. While the result achieved an overall classification accuracy of 95.9% across 6,300 national validation points #cite(<HGN1900dataset>), a fundamental limitation of its color-based approach is the inability to distinguish between features, buildings and paved roads are both represented in red on the Bonne maps, resulting in a single merged class that conflates two distinct urban features.
+
+#cite(<gobbiNewToolsClassification2019>, form: "prose") proposed an OBIA-based workflow for semi-automatic digitization of heterogeneous map collections, combining region-based image segmentation with supervised machine learning classifiers and an automated text and symbol removal module. Applied to three maps with very different characteristics, this approach achieved average classification of 97%, marking a significant improvement over manual methods.
+
+Despite these advances, semi-automated methods carry important limitations. The correct parameters such as color thresholds, segmentation scales, or classifier training samples must be determined and tuned individually for each map or map series, as differences in printing quality, paper degradation, and cartographic style across map editions can significantly affect classification performance #cite(<ICDAR2021Vectorization>)
+
+=== Machine learning and deep learning classification
+// Intro ML+DL
+The limitations of rule-based semi automated method have motivated the adoption of machine learning and, more recently, deep learning approaches, which learn feature representations directly from annotated training data rather than relying on manual defined rules. Compared to traditional machine learning classifiers such as Random Forest or Support Vector Machines, which require hand-crafted feature descriptors as input, deep learning models, particularly Convolutional Neural Network (CNN), can automatically learn hierarchical visual features from raw image patches, offering greater flexibility and robustness across varying cartographic styles @heitzlerCartographicReconstructionBuilding2020 @hosseiniMapReaderComputerVision2022. 
+
+// 4 Computer vision approach
+CNN-based methods have been increasingly applied within the historical maps domain. At the patch level, image classification approaches assign a class label to each image patch, and have been used to detect urban settlements and built-up areas from historical topographical map sheets @uhlExtractingHumanSettlement2017 @hosseiniMapReaderComputerVision2022. At a finer level of detail, semantic segmentation models, most notably U-Net #cite(<ronnebergerUNetConvolutionalNetworks2015>), assign a class label to every pixel in the image and have been successfully applied to extract building footprints @heitzlerCartographicReconstructionBuilding2020, road networks, and wetland symbology #cite(<oharaUnleashingPowerOld2024>). For tasks requiring individual object delineation, instance segmentation such as Mask R-CNN produce a separate mask for each detected object and have been applied to text detection and segmentation in historical maps, supporting downstream text removal and vectorization workflows #cite(<sureshdoddaAutomatedTextRecognition2024>). These four task types, namely image classification, object detection, semantic segmentation, and instance segmentation, represent the main computer vision approaches used for historical map content extraction and form the methodological basis for the extraction approaches investigated in this thesis.
+
+While these approaches have demonstrated promising results, their application to historical maps introduces a set of specific challenges that are discussed in the following section.
+
+== Deep learning for historical map analysis
+
+// Require large volume of training dataset
+Despite the promising results demonstrated by CNN-based approaches, deep learning methods share a common and fundamental requirement: large volumes of annotated training data. Producing such annotations is a costly and labor-intensive process, as each map sheet must be manually interpreted and labeled, which contradicts the very goal of automation #cite(<arzoumanidisAutomaticUncertaintyAwareSynthetic2025>). This challenge is particularly significant for models developed for a specific map series or historical period, where the amount of available training data is limited in both geographic coverage and time span.
+
+// Homogeneous corpora vs heterogeneous corpora
+The problem of data scarcity is further compounded by the diversity of historical map styles. Models trained on a homogeneous corpus, such as a single national map series, tend to perform well within that corpus but struggle to generalize to maps with different cartographic styles, color palettes, or symbology #cite(<petitpierreGenericSemanticSegmentation2021>). #cite(<petitpierreGenericSemanticSegmentation2021>, form: "prose") confirmed this through experiments across two diverse map corpora, showing that stylistic variability significantly degrades segmentation performance, and that developing a truly generic model for heterogeneous map collections remain an open challenge.
+
+// Image translation
+To address training data scarcity, image-to-image translation methods have emerged as a promising strategy for generating synthetic training data. #cite(<zhuUnpairedImagetoImageTranslation2020>, form: "prose") demonstrated image-to-image translation applied to several visual domain transfer tasks, including the translation of aerial photographs to Google Maps style and vice versa. In their work, they distinguished between two translation paradigms: paired translation using pix2pix framework, which requires matches input-output image pairs, and unpaired translation using CycleGAN, which learns to transfer styles between two domains without requiring any direct correspondence between images. For historical maps, the unpaired approach is particularly relevant, as paired correspondences between a historical map and its equivalent ground truth rarely exist. This approach offers a practical path toward reducing the annotation burden for historical map analysis and forms the basis for synthetic training data strategy adopted in this thesis.
+
+
+// Generic pre-trained model
+A related limitation concerns the use of large pre-trained foundation models. Models such as the Segment Anything Model (SAM) and Vision Transformer (ViT)-based architectures have shown strong performance across general computer vision tasks, but their training on natural images creates a domain mismatch when applied to historical maps, leading to poor zero-shot performance on cartographic content #cite(<xiaMapSAMAdaptingSegment2025>). #cite(<xiaMapSAMAdaptingSegment2025>, form: "prose") addressed this by adapting SAM specifically for historical map feature detection through domain-specific fine-tuning, demonstrating that generic foundation models require substantial adaptation before they can be reliably applied to historical maps.
+
+// Post-processing / vectorization problem
+Beyond the training data challenge, deep learning pipelines for historical map analysis, typically require multi-step post-processing workflows to convert pixel-level model outputs into usable vector geometries #cite(<heitzlerCartographicReconstructionBuilding2020>). Each additional step in this pipeline introduces opportunities for error propagation, and the engineering effort required to design and maintain these steps for each specific map type reduce the overall degree of automation #cite(<xiaVectorizingHistoricalMaps2024>). 
+This limitation underlines the need for extraction approaches that are not only accurate, but also practical and transferable across different map editions without requiring extensive map-specific tuning.
 
 
 
-
-
-
-
-
-== Urban Transformation / Change Analysis
-- Outline

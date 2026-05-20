@@ -5,22 +5,6 @@
 This chapter begins with an introduction to the problem statement and motivation behind this research, followed by the research objectives and questions. The scope of the research is defined. Ultimately, an outline of the thesis structure is provided to guide the reader through the subsequent chapters.
 
 == Introduction <sec:intro>
-#block-todo[Key points][
-  - What the problem is?
-  - Why is it important to solve this problem?
-  Value of historical maps for understanding urban transformation
-  - [X] General importanace
-  - [X] Specific importance for urban transformation studies
-  - [X] Specific importance for the Netherlands context
-
-  Challenges
-  - [X] All challenges: technical, data extraction
-
-  Deep learning
-  - [ ] The rise of Deep learning
-  - [ ] Notoriously large training dataset requirement
-  - [ ] limited homogeneous map corpus
-]
 
 Historical maps are widely recognized as valuable resources for understanding the transformation of geographical space over time, particularly in the fields of historical and urban studies. The rapid development of geodesy and cartography from the 18th century resulted in extensive production of topographic maps at various scales across the Western world. Among these, urban maps are especially informative due to their high level of detail and often reliable geometric representation of spatial features #cite(<ICDAR2021Vectorization>). By integrating these maps within modern geospatial systems, researchers can gain valuable insights into the processes that shaped present-day urban configurations #cite(<nobajasHistoricalMapOnline2015>). 
 
@@ -60,17 +44,16 @@ The following clarifies the scope of this thesis:
 - This study only uses historical maps that are already scanned, and digitally available to access online from authoritative sources. Besides this study only uses historical maps that are already georeferenced.
 - The use of additional historical data sources (cadastral records, building registries, old photographs, paintings, or textual archives) is not included in this study.
 - Urban extent in this study refers to the horizontal built-up footprint as depicted on the map surface, such as building blocks and individual building footprints. Vertical urban change such as building height or densification, and administration-based boundary definitions are not considered.
+// - The term "historical maps" used in this thesis refers to topographic maps produced through ground-based field survey methods, originating from the era of systematic cartographic programmes in the 18th to early 20th century (pre-modern aerial photogrammetry or digital remote sensing).
 
 
 == Thesis Outline
-
-#todo[CH1 - Outline of the thesis structure, e.g. chapter by chapter summary]
 
 This thesis is structured into six main chapters, the outline of which is as follows:
 
   @chap:intro[Chapter] gives the overview of the research, including the background and motivation, followed by research objectives, research questions, scope of research, and lastly, the outline to the thesis.
   
-  @chap:relatedwork[Chapter] provides an overview of scientific related work and theoretical background related to the thesis topic. It begins with a review of previous studies on historical maps for urban studies, existing methods of feature extraction from historical maps, deep learning approaches, and the use IIIF in supporting access of historical map collections.
+  @chap:relatedwork[Chapter] provides an overview of scientific related work and theoretical background related to the thesis topic. It begins with a review of previous studies on historical maps for urban studies, existing methods of feature extraction from historical maps, deep learning approaches, and the use of IIIF in supporting access of historical map collections.
 
   @chap:methodology[Chapter] provides the detailed description of the research methodology, including the approaches for data processing, model training, evaluation, and post-processing steps.
 

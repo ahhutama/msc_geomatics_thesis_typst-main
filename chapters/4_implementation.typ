@@ -19,7 +19,7 @@ Additionally, several supporting datasets are also used for the implementation o
 Bonnebladen maps is the chromo-topographical map of the Kingdom of the Netherlands on the scale of 1:25,000, which was originally produced by the former _Topograhisch Bureau_ between 1865 to 1949 #cite(<DANS-XQF-R4XF_1940>). The map series can be accessed from the Data Station Physical and Technical Sciences (DANS) repository in JPEG scans and GeoTIFF formats via their website (Link: #link("https://phys-techsciences.datastations.nl/dataset.xhtml?persistentId=doi:10.17026/dans-xqf-r4xf")). Relevant materials such as data catalogue, map legends, and metadata are also available on the website. To access the dataset, users are required to create a DANS account and request access to the dataset. Example of a single map sheet of Delft area is shown in the @fig:sample_bonnebladen below.
 
 #figure(
-  image("../figs/bonnegrids-figs/NL-HaNA_4.ZHPB4_14A_20-groot.jpg", width: 75%),
+  image("../figs/bonnegrids-figs/NL-HaNA_4.ZHPB4_14A_20-groot.jpg", width: 100%),
   placement: auto,
   caption: [Single sheet of Bonnebladen - sheet no 449 - Delft]
 )<fig:sample_bonnebladen>
@@ -46,13 +46,13 @@ Following this, another historical maps from the city archives, the _Brandgrens 
 
 
 #figure(
-  image("../figs/rotterdam-figs/rtm1897-3.jpg", width: 50%),
+  image("../figs/rotterdam-figs/rtm1897-3.jpg", width: 100%),
   placement: auto,
   caption: [Sample sheet of Rotterdam municipality map - sheet no 3]
 )<fig:sample_rtm1897>
 
 #figure(
-  image("../figs/rotterdam-figs/brandgrens_kaart.png", width: 75%),
+  image("../figs/rotterdam-figs/brandgrens_kaart.png", width: 100%),
   placement: auto,
   caption: [Fire boundary map of Rotterdam]
 )<fig:sample_brandgrens>

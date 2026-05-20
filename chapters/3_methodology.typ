@@ -9,16 +9,30 @@ The following sections provide a detailed description of each methodology. Secti
 
 
 == Patch-based CNN method DL
+=== Data training
+=== Model training
+=== Evaluation
+
+
+
 
 == Object-based method DL
-
+=== Georeference
+While there are recent advancement to automate georeference on historical maps (for example using local delaunay cite Vaienti), in this case I need to perform georeference manually. Reason: Georeference is conducted by the AllMaps Team, 
+- Create table number of GCP for each sheet Rotterdam. From inspected Geoference Annotation. Sheet 2,3,4. #cite(<meijersMappingEdgeNovel2024>)
 
 === Image-to-Image translation using CycleGAN DL
+To address training data scarcity, image-to-image translation methods have emerged as a promising strategy for generating synthetic training data. A key distinction exists between paired translation, which requires matched input-output image pairs that are rarely available for historical maps, and unpaired translation, which requires no such correspondence and is better suited to the historical map domain. This approach offers a practical path toward reducing the annotation burden for historical map analysis
+#cite(<zhuUnpairedImagetoImageTranslation2020>)
 
-==== Evaluation (FID)
+==== Model training
+==== Evaluation
 
 === Instance segmentation using Mask R-CNN DL
 
+==== Data preparation
+==== Model training
+==== Evaluation
 
 
 == Change Analysis

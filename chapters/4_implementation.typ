@@ -19,7 +19,7 @@ Additionally, several supporting datasets are also used for the implementation o
 Bonnebladen maps is the chromo-topographical map of the Kingdom of the Netherlands on the scale of 1:25,000, which was originally produced by the former _Topograhisch Bureau_ between 1865 to 1949 #cite(<DANS-XQF-R4XF_1940>). The map series can be accessed from the Data Station Physical and Technical Sciences (DANS) repository in JPEG scans and GeoTIFF formats via their website (Link: #link("https://phys-techsciences.datastations.nl/dataset.xhtml?persistentId=doi:10.17026/dans-xqf-r4xf")). Relevant materials such as data catalogue, map legends, and metadata are also available on the website. To access the dataset, users are required to create a DANS account and request access to the dataset. Example of a single map sheet of Delft area is shown in the @fig:sample_bonnebladen below.
 
 #figure(
-  image("../figs/bonnegrids-figs/NL-HaNA_4.ZHPB4_14A_20-groot.jpg", width: 100%),
+  image("../figs/bonnegrids-figs/NL-HaNA_4.ZHPB4_14A_20-groot.jpg", width: 80%),
   placement: auto,
   caption: [Single sheet of Bonnebladen - sheet no 449 - Delft]
 )<fig:sample_bonnebladen>
@@ -62,11 +62,10 @@ The dataset is selected as the main dataset for method 2 because of its detailed
 
 
 === Basisregistratie Grootschalige Topografie (BGT) <sec:bgt>
-The _Basisregistratie Grootschalige Topografie_ (BGT) is a large-scale topographic dataset that provides detailed information about the built environment in the Netherlands. The dataset includes information about buildings, roads, water bodies, and other topographic features. The building footprints in the BGT dataset are represented as polygons with relevant attributes to the research such as function and construction year. The dataset is available for download from the website of the Dutch Kadaster with the following link: #link("https://api.pdok.nl/lv/bgt/ogc/v1/").
+The _Basisregistratie Grootschalige Topografie_ (BGT) is a large-scale topographic dataset that provides detailed information about the built environment in the Netherlands. The dataset includes information about buildings, roads, water bodies, and other topographic features. The building footprints in the BGT dataset are represented as polygons with relevant attributes to the research such as function and construction year. The dataset is available for download from the website of the Dutch Kadaster with the following link: #link("https://api.pdok.nl/lv/bgt/ogc/v1/"). Another way to download the data is by using BGT Downloader plugin in QGIS (link: https://plugins.qgis.org/plugins/bgt_downloader/)
 
 == Study Area <sec:studyarea>
-#todo[Study area in: Chapter 4 or Chapter 3?]
-For method 1, the research focuses on the Province of South Holland, which is one of the most urbanized regions in the Netherlands. #todo[Cite Why Zuid-Holland and Rotterdam as study area] While for method 2, the research limits the study area to the city of Rotterdam. Due to World War II, the city of Rotterdam has undergone significant urban transformation, which makes it an interesting case study for analyzing urban change over time. The choice of the study area is based on the availability of data as well as the relevance to the research topic, where both areas have rich historical map collections and have undergone significant urban transformation in the past.
+For method 1, the research focuses on the Province of South Holland, which is one of the most urbanized regions in the Netherlands. While for method 2, the research limits the study area to the city of Rotterdam. Due to World War II, the city of Rotterdam has undergone significant urban transformation, which makes it an interesting case study for analyzing urban change over time. The choice of the study area is based on the availability of data as well as the relevance to the research topic, where both areas have rich historical map collections and have undergone significant urban transformation in the past.
 
 
 

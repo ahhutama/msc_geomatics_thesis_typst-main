@@ -1,10 +1,7 @@
 data/
-figs/bonnegrids-figs/
-figs/diagrams/
-figs/download-bonnebladen-figs/
-figs/mapreader-figs/
-figs/rotterdam-figs/
-figs/ch2-figs/
+figs/
 notes/
 plots/
 temp/
+draft.typ
+draft_v1_20260521.pdf

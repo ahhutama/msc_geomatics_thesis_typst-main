@@ -29,15 +29,15 @@ Addressing the challenges and trade-offs in the previous @sec:intro is essential
 
 
 The main research question of this thesis is:
-_"To what extent do patch-level and object-level deep learning approaches differ in their effectiveness for extracting urban extent from multi-temporal Dutch historical topographic maps for enabling urban change analysis?"_
+_"To what extent do patch-level and object-level deep learning approaches differ in their effectiveness for extracting urban extent from multi-temporal historical topographic maps for enabling urban change analysis?"_
 
 
 To address the main question, the following sub-research questions are as follows:
-1. "How can patch-level classification deep learning method be adapted for nation-wide #todo[TBC - Method 1 - nationwide] urban extent extraction from Dutch historical maps?"
-2. "How can bootstrapping for synthesizing training dataset using CycleGAN method be adapted for instance segmentation for individual building footprints (object-level)?"
+1. How can patch-level deep learning classification be applied to extract urban extent from multi-temporal historical maps?
+2. How can CycleGAN-based synthetic data generation be applied to enable object-level building footprint extraction from historical maps?
 // What are the required processing steps? 
-3. "What spatial analysis methods can be applied to extracted urban extent to quantify and characterize urban transformation across multiple temporal periods?"#todo[Sub-RQ3 - TBC]
-4. "What are the relative strengths, limitations, and trade-offs between patch-level and object-level approaches for urban extent extraction?"
+3. What urban change patterns can be identified by comparing automatically extracted urban extents from historical maps against reference data?
+4. What are the relative strengths, limitations, and trade-offs between patch-level and object-level deep learning approaches for urban extent from historical maps?
 
 == Scope
 The following clarifies the scope of this thesis:
@@ -53,7 +53,7 @@ This thesis is structured into six main chapters, the outline of which is as fol
 
   @chap:intro[Chapter] gives the overview of the research, including the background and motivation, followed by research objectives, research questions, scope of research, and lastly, the outline to the thesis.
   
-  @chap:relatedwork[Chapter] provides an overview of scientific related work and theoretical background related to the thesis topic. It begins with a review of previous studies on historical maps for urban studies, existing methods of feature extraction from historical maps, deep learning approaches, and the use of IIIF in supporting access of historical map collections.
+  @chap:relatedwork[Chapter] provides an overview of scientific related work and theoretical background related to the thesis topic. It begins with a review of previous studies on historical maps for urban studies. Followed by the use of IIIF in supporting access of historical map collections, existing methods of feature extraction from historical maps, and deep learning approaches.
 
   @chap:methodology[Chapter] provides the detailed description of the research methodology, including the approaches for data processing, model training, evaluation, and post-processing steps.
 

@@ -85,6 +85,7 @@
 )
 #counter(page).update(1)
 #set heading(numbering: "1.")
+#show heading.where(level: 4): set heading(numbering: none) // Applies globally - remove numbering in heading level 4, 
 
 #include "chapters/1_introduction.typ"
 #include "chapters/2_relatedwork.typ"
